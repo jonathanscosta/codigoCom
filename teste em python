@@ -1,0 +1,24 @@
+nomes_cadastrados = {}
+
+while True:
+    print("Cadastre uma tarefa ou digite 'sair' para encerrar.")
+    dia = input("Digite o dia da tarefa ou 'sair': ").capitalize()
+    
+    if dia.lower() == "sair":
+        break
+    
+    tarefa = input(f"Qual tarefa para {dia}? ")
+    prioridade = int(input(f"Defina a prioridade para '{tarefa}' (1 = Alta, 2 = Média, 3 = Baixa): "))
+    
+    if dia in nomes_cadastrados:
+        nomes_cadastrados[dia].append((prioridade, tarefa))  # Adiciona a tarefa com prioridade
+    else:
+        nomes_cadastrados[dia] = [(prioridade, tarefa)]  # Cria uma nova lista com a tarefa e prioridade
+
+# Exibe as tarefas organizadas por prioridade
+print("\nTarefas cadastradas por prioridade:")
+for i, (dia, tarefas) in enumerate(nomes_cadastrados.items(), start=1):
+    tarefas.sort()  # Ordena as tarefas pela prioridade (menor número = maior prioridade)
+    print(f"{i}. {dia}:")
+    for prioridade, tarefa in tarefas:
+        print(f"   - ({prioridade}) {tarefa}")
